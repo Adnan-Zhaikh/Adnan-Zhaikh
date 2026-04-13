@@ -1,4 +1,4 @@
-[README-1.md](https://github.com/user-attachments/files/26672716/README-1.md)
+[README-2.md](https://github.com/user-attachments/files/26673080/README-2.md)
 <div align="center">
 
 ```
@@ -10,9 +10,9 @@
 ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-### `< Student Developer />` &nbsp;·&nbsp; Python &nbsp;·&nbsp; C++ &nbsp;·&nbsp; Java &nbsp;·&nbsp; Web
+### `BSc Computer Science Student` 
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matter.;Python+%7C+C%2B%2B+%7C+Java+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matters.;Python+%7C+C%2B%2B+%7C+Java+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
 
 </div>
 
@@ -22,8 +22,9 @@
 
 ```python
 adnan = {
-    "role"       : "Student Developer",
-    "learning"   : ["Python", "C++", "Java", "DSA", "Web Development"],
+    "degree"     : "BSc Computer Science",
+    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript"],
+    "focus"      : ["Data Structures & Algorithms", "Web Development"],
     "mindset"    : "Build. Break. Learn. Repeat.",
     "currently"  : "Strengthening fundamentals & starting DSA",
     "goal"       : "Ship real projects and become a strong developer",
@@ -73,10 +74,6 @@ adnan = {
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Adnan-Zhaikh&show_icons=true&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&icon_color=00FF9C&title_color=00FF9C&text_color=c9d1d9&hide_border=false)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Adnan-Zhaikh&layout=compact&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&title_color=00FF9C&text_color=c9d1d9)
-
 ![GitHub Streak](https://streak-stats.demolab.com?user=Adnan-Zhaikh&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
 
 </div>
@@ -101,7 +98,5 @@ adnan = {
 // currently compiling dreams into code...
 while (!success) { keep_going(); }
 ```
-
-![Visitor Count](https://komarev.com/ghpvc/?username=Adnan-Zhaikh&color=00FF9C&style=flat-square&label=PROFILE+VIEWS)
 
 </div>
