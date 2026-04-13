@@ -1,5 +1,4 @@
-[README.md](https://github.com/user-attachments/files/26672540/README.md)
-
+[README-1.md](https://github.com/user-attachments/files/26672716/README-1.md)
 <div align="center">
 
 ```
@@ -11,9 +10,9 @@
 ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-### `< Student Developer />` &nbsp;·&nbsp; Python &nbsp;·&nbsp; DSA &nbsp;·&nbsp; Web
+### `< Student Developer />` &nbsp;·&nbsp; Python &nbsp;·&nbsp; C++ &nbsp;·&nbsp; Java &nbsp;·&nbsp; Web
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matter.;Python+%7C+DSA+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matter.;Python+%7C+C%2B%2B+%7C+Java+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
 
 </div>
 
@@ -24,9 +23,9 @@
 ```python
 adnan = {
     "role"       : "Student Developer",
-    "learning"   : ["Python", "Data Structures & Algorithms", "Web Development"],
+    "learning"   : ["Python", "C++", "Java", "DSA", "Web Development"],
     "mindset"    : "Build. Break. Learn. Repeat.",
-    "currently"  : "Grinding DSA problems & strengthening Python fundamentals",
+    "currently"  : "Strengthening fundamentals & starting DSA",
     "goal"       : "Ship real projects and become a strong developer",
 }
 ```
@@ -35,17 +34,19 @@ adnan = {
 
 ## `> skills --list`
 
-**Languages & Fundamentals**
+**Languages**
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=00FF9C)
+![C++](https://img.shields.io/badge/C++-0d1117?style=for-the-badge&logo=cplusplus&logoColor=00FF9C)
+![Java](https://img.shields.io/badge/Java-0d1117?style=for-the-badge&logo=openjdk&logoColor=00FF9C)
 ![HTML5](https://img.shields.io/badge/HTML5-0d1117?style=for-the-badge&logo=html5&logoColor=00FF9C)
 ![CSS3](https://img.shields.io/badge/CSS3-0d1117?style=for-the-badge&logo=css3&logoColor=00FF9C)
 ![JavaScript](https://img.shields.io/badge/JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor=00FF9C)
 
-**Concepts & Focus Areas**
+**Focus Areas**
 
-![DSA](https://img.shields.io/badge/Data_Structures_%26_Algorithms-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)
-![Problem Solving](https://img.shields.io/badge/Problem_Solving-0d1117?style=for-the-badge&logo=thealgorithms&logoColor=00FF9C)
+![DSA](https://img.shields.io/badge/Data_Structures_%26_Algorithms-0d1117?style=for-the-badge&logo=thealgorithms&logoColor=00FF9C)
+![Problem Solving](https://img.shields.io/badge/Problem_Solving-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)
 
 **Tools**
 
@@ -58,11 +59,11 @@ adnan = {
 ## `> current_objectives`
 
 ```bash
-[✓] Master Python fundamentals
-[✓] Learn string manipulation, slicing & escape sequences
-[~] Solve DSA problems — Two Pointers · Hash Maps · Arrays
+[✓] Learn Python fundamentals
+[✓] Pick up C++ & Java basics
+[~] Start solving DSA problems on LeetCode
 [ ] Build first full-stack web project
-[ ] Hit 100+ LeetCode problems solved
+[ ] Solve 50+ LeetCode problems
 [ ] Land a dev internship / role
 ```
 
@@ -72,25 +73,13 @@ adnan = {
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=adnan&show_icons=true&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&icon_color=00FF9C&title_color=00FF9C&text_color=c9d1d9&hide_border=false)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Adnan-Zhaikh&show_icons=true&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&icon_color=00FF9C&title_color=00FF9C&text_color=c9d1d9&hide_border=false)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=adnan&layout=compact&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&title_color=00FF9C&text_color=c9d1d9)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Adnan-Zhaikh&layout=compact&theme=chartreuse-dark&bg_color=0d1117&border_color=00FF9C&title_color=00FF9C&text_color=c9d1d9)
 
-![GitHub Streak](https://streak-stats.demolab.com?user=adnan&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
+![GitHub Streak](https://streak-stats.demolab.com?user=Adnan-Zhaikh&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
 
 </div>
-
----
-
-## `> dsa_log`
-
-| # | Problem | Pattern | Status |
-|---|---------|---------|--------|
-| 1 | Two Sum | Hash Map | ✅ Solved |
-| 2 | Reverse String | Two Pointers | ✅ Solved |
-| … | More incoming… | — | 🔄 In Progress |
-
-> *"Understand the pattern. The problem is just a costume."*
 
 ---
 
@@ -98,9 +87,9 @@ adnan = {
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=00FF9C)](https://linkedin.com/in/adnan)
-[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)](https://leetcode.com/adnan)
-[![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=00FF9C)](mailto:your@email.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=00FF9C)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
+[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)](https://leetcode.com/Adnan-Zhaikh)
+[![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=00FF9C)](mailto:adnanibrahimshaikh@gmail.com)
 
 </div>
 
@@ -113,6 +102,6 @@ adnan = {
 while (!success) { keep_going(); }
 ```
 
-![Visitor Count](https://komarev.com/ghpvc/?username=adnan&color=00FF9C&style=flat-square&label=PROFILE+VIEWS)
+![Visitor Count](https://komarev.com/ghpvc/?username=Adnan-Zhaikh&color=00FF9C&style=flat-square&label=PROFILE+VIEWS)
 
 </div>
