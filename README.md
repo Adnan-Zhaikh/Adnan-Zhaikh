@@ -1,4 +1,4 @@
-[README-2.md](https://github.com/user-attachments/files/26673080/README-2.md)
+[README.md](https://github.com/user-attachments/files/26673080/README-2.md)
 <div align="center">
 
 ```
@@ -23,7 +23,7 @@
 ```python
 adnan = {
     "degree"     : "BSc Computer Science",
-    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript"],
+    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript", "SQL"],
     "focus"      : ["Data Structures & Algorithms", "Web Development"],
     "mindset"    : "Build. Break. Learn. Repeat.",
     "currently"  : "Strengthening fundamentals & starting DSA",
