@@ -23,8 +23,8 @@
 ```python
 adnan = {
     "degree"     : "BSc Computer Science",
-    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript", "SQL"],
-    "focus"      : ["Data Structures & Algorithms", "Web Development"],
+    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript", "SQL", "PostgreSQL"],
+    "focus"      : ["Data Structures & Algorithms", "Web Development", "Data Science],
     "mindset"    : "Build. Break. Learn. Repeat.",
     "currently"  : "Strengthening fundamentals & starting DSA",
     "goal"       : "Ship real projects and become a strong developer",
