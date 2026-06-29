@@ -1,7 +1,6 @@
-[README.md](https://github.com/user-attachments/files/26673080/README-2.md)
 <div align="center">
 
-```
+```text
 █████╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ██╗
 ██╔══██╗██╔══██╗████╗  ██║██╔══██╗████╗  ██║
 ███████║██║  ██║██╔██╗ ██║███████║██╔██╗ ██║
@@ -10,9 +9,9 @@
 ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-### `BSc Computer Science Student` 
+### `BSc Computer Science Student`
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matters.;Python+%7C+C%2B%2B+%7C+Java+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matter.;Python+%7C+Java+%7C+TypeScript+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
 
 </div>
 
@@ -23,10 +22,11 @@
 ```python
 adnan = {
     "degree"     : "BSc Computer Science",
-    "languages"  : ["Python", "C++", "Java", "HTML", "CSS", "JavaScript", "SQL", "PostgreSQL"],
-    "focus"      : ["Data Structures & Algorithms", "Web Development", "Data Science"],
-    "mindset"    : "Build. Break. Learn. Repeat.",
-    "currently"  : "Strengthening fundamentals & starting DSA",
+    "languages"  : ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
+    "frameworks" : ["React","Next.js"],
+    "databases"  : ["MySQL","PostgreSQL"],
+    "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
+    "currently"  : "Learning Java for DSA, React, Next.js & TypeScript",
     "goal"       : "Ship real projects and become a strong developer",
 }
 ```
@@ -35,21 +35,33 @@ adnan = {
 
 ## `> skills --list`
 
-**Languages**
+### Languages
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=00FF9C)
-![C++](https://img.shields.io/badge/C++-0d1117?style=for-the-badge&logo=cplusplus&logoColor=00FF9C)
 ![Java](https://img.shields.io/badge/Java-0d1117?style=for-the-badge&logo=openjdk&logoColor=00FF9C)
+![C++](https://img.shields.io/badge/C++-0d1117?style=for-the-badge&logo=cplusplus&logoColor=00FF9C)
+![JavaScript](https://img.shields.io/badge/JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor=00FF9C)
+![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=for-the-badge&logo=typescript&logoColor=00FF9C)
 ![HTML5](https://img.shields.io/badge/HTML5-0d1117?style=for-the-badge&logo=html5&logoColor=00FF9C)
 ![CSS3](https://img.shields.io/badge/CSS3-0d1117?style=for-the-badge&logo=css3&logoColor=00FF9C)
-![JavaScript](https://img.shields.io/badge/JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor=00FF9C)
 
-**Focus Areas**
+### Frameworks & Libraries
+
+![React](https://img.shields.io/badge/React-0d1117?style=for-the-badge&logo=react&logoColor=00FF9C)
+![Next.js](https://img.shields.io/badge/Next.js-0d1117?style=for-the-badge&logo=nextdotjs&logoColor=00FF9C)
+
+### Databases
+
+![MySQL](https://img.shields.io/badge/MySQL-0d1117?style=for-the-badge&logo=mysql&logoColor=00FF9C)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0d1117?style=for-the-badge&logo=postgresql&logoColor=00FF9C)
+
+### Focus Areas
 
 ![DSA](https://img.shields.io/badge/Data_Structures_%26_Algorithms-0d1117?style=for-the-badge&logo=thealgorithms&logoColor=00FF9C)
 ![Problem Solving](https://img.shields.io/badge/Problem_Solving-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)
+![Web Development](https://img.shields.io/badge/Web_Development-0d1117?style=for-the-badge&logo=webflow&logoColor=00FF9C)
 
-**Tools**
+### Tools
 
 ![Git](https://img.shields.io/badge/Git-0d1117?style=for-the-badge&logo=git&logoColor=00FF9C)
 ![GitHub](https://img.shields.io/badge/GitHub-0d1117?style=for-the-badge&logo=github&logoColor=00FF9C)
@@ -61,11 +73,13 @@ adnan = {
 
 ```bash
 [✓] Learn Python fundamentals
-[✓] Pick up C++ & Java basics
+[✓] Learn Java & C++ fundamentals
+[✓] Learn JavaScript fundamentals
+[~] Learn React, Next.js & TypeScript
 [~] Start solving DSA problems on LeetCode
-[ ] Build first full-stack web project
-[ ] Solve 50+ LeetCode problems
-[ ] Land a dev internship / role
+[ ] Build full-stack web applications
+[ ] Solve 100+ LeetCode problems
+[ ] Land a Software Developer Internship
 ```
 
 ---
@@ -94,9 +108,15 @@ adnan = {
 
 <div align="center">
 
-```
-// currently compiling dreams into code...
-while (!success) { keep_going(); }
+```cpp
+while (!success) {
+    keepLearning();
+    buildProjects();
+    commitCode();
+}
 ```
 
+⭐ Thanks for stopping by!
+
 </div>
+````
