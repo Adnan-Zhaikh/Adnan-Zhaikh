@@ -88,7 +88,7 @@ adnan = {
 
 <div align="center">
 
-![GitHub Streak](https://streak-stats.demolab.com?user=Adnan-Zhaikh&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
+![GitHub Streak](https://github-readme-streak-stats-eight.vercel.app?user=Adnan-Zhaikh&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
 
 </div>
 
