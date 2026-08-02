@@ -76,9 +76,9 @@ adnan = {
 [✓] Learn Java & C++ fundamentals
 [✓] Learn JavaScript fundamentals
 [✓] Learn React, Next.js & TypeScript
-[~] Start solving DSA problems on LeetCode
-[ ] Build full-stack web applications
-[ ] Solve 100+ LeetCode problems
+[✓] Start solving DSA problems on LeetCode
+[~] Build full-stack web applications
+[~] Solve 100+ LeetCode problems
 [ ] Land a Software Developer Internship
 ```
 
