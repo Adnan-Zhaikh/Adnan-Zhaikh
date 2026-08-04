@@ -72,13 +72,14 @@ adnan = {
 ## `> current_objectives`
 
 ```bash
-[✓] Learn Python fundamentals
-[✓] Learn Java & C++ fundamentals
-[✓] Learn JavaScript fundamentals
-[✓] Learn React, Next.js & TypeScript
-[✓] Start solving DSA problems on LeetCode
-[~] Build full-stack web applications
+[✓] Core fundamentals — Python, Java, C++, JavaScript, TypeScript, React, Next.js
+[✓] Full-stack project — Course Tracker & Certificate Generator (Next.js, PostgreSQL, deployed)
+
 [~] Solve 100+ LeetCode problems
+[~] DSA logic building — pattern recognition, not just problem count
+[~] Data Science fundamentals (weekly)
+[ ] Build a project in Java
+[ ] Build a project in Python
 [ ] Land a Software Developer Internship
 ```
 
