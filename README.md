@@ -1,123 +1,137 @@
 <div align="center">
 
-```text
-█████╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ██╗
+<img src="https://readme-typing-svg.demolab.com?font=Press+Start+2P&size=14&duration=3000&pause=1000&color=FFD700&center=true&vCenter=true&width=600&lines=LOADING+PLAYER..." alt="Typing SVG" />
+
+<br>
+
+```
+ █████╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ██╗
 ██╔══██╗██╔══██╗████╗  ██║██╔══██╗████╗  ██║
 ███████║██║  ██║██╔██╗ ██║███████║██╔██╗ ██║
 ██╔══██║██║  ██║██║╚██╗██║██╔══██║██║╚██╗██║
 ██║  ██║██████╔╝██║ ╚████║██║  ██║██║ ╚████║
 ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝
+
+     LEVEL: BSc CS — YEAR 2
 ```
-
-### `BSc Computer Science Student`
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1000&color=00FF9C&center=true&vCenter=true&width=500&lines=Learning+to+build+things+that+matter.;Python+%7C+Java+%7C+TypeScript+%7C+Web+Development;One+commit+at+a+time.)](https://git.io/typing-svg)
 
 </div>
 
----
+<br>
 
-## `> whoami`
-
-```python
-adnan = {
-    "degree"     : "BSc Computer Science",
-    "languages"  : ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
-    "frameworks" : ["React","Next.js"],
-    "databases"  : ["MySQL","PostgreSQL"],
-    "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
-    "currently"  : "Learning Java for DSA, React, Next.js & TypeScript",
-    "goal"       : "Ship real projects and become a strong developer",
-}
-```
-
----
-
-## `> skills --list`
-
-### Languages
-
-![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=00FF9C)
-![Java](https://img.shields.io/badge/Java-0d1117?style=for-the-badge&logo=openjdk&logoColor=00FF9C)
-![C++](https://img.shields.io/badge/C++-0d1117?style=for-the-badge&logo=cplusplus&logoColor=00FF9C)
-![JavaScript](https://img.shields.io/badge/JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor=00FF9C)
-![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=for-the-badge&logo=typescript&logoColor=00FF9C)
-![HTML5](https://img.shields.io/badge/HTML5-0d1117?style=for-the-badge&logo=html5&logoColor=00FF9C)
-![CSS3](https://img.shields.io/badge/CSS3-0d1117?style=for-the-badge&logo=css3&logoColor=00FF9C)
-
-### Frameworks & Libraries
-
-![React](https://img.shields.io/badge/React-0d1117?style=for-the-badge&logo=react&logoColor=00FF9C)
-![Next.js](https://img.shields.io/badge/Next.js-0d1117?style=for-the-badge&logo=nextdotjs&logoColor=00FF9C)
-
-### Databases
-
-![MySQL](https://img.shields.io/badge/MySQL-0d1117?style=for-the-badge&logo=mysql&logoColor=00FF9C)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0d1117?style=for-the-badge&logo=postgresql&logoColor=00FF9C)
-
-### Focus Areas
-
-![DSA](https://img.shields.io/badge/Data_Structures_%26_Algorithms-0d1117?style=for-the-badge&logo=thealgorithms&logoColor=00FF9C)
-![Problem Solving](https://img.shields.io/badge/Problem_Solving-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)
-![Web Development](https://img.shields.io/badge/Web_Development-0d1117?style=for-the-badge&logo=webflow&logoColor=00FF9C)
-
-### Tools
-
-![Git](https://img.shields.io/badge/Git-0d1117?style=for-the-badge&logo=git&logoColor=00FF9C)
-![GitHub](https://img.shields.io/badge/GitHub-0d1117?style=for-the-badge&logo=github&logoColor=00FF9C)
-![VS Code](https://img.shields.io/badge/VS_Code-0d1117?style=for-the-badge&logo=visualstudiocode&logoColor=00FF9C)
-
----
-
-## `> current_objectives`
-
-```bash
-[✓] Core fundamentals — Python, Java, C++, JavaScript, TypeScript, React, Next.js
-[✓] Full-stack project — Course Tracker & Certificate Generator (Next.js, PostgreSQL, deployed)
-
-[~] Solve 100+ LeetCode problems
-[~] DSA logic building — pattern recognition, not just problem count
-[~] Data Science fundamentals (weekly)
-[ ] Build a project in Java
-[ ] Build a project in Python
-[ ] Land a Software Developer Internship
-```
-
----
-
-## `> stats`
+## 🎮 PLAYER STATS
 
 <div align="center">
 
-![GitHub Streak](https://github-readme-streak-stats-eight.vercel.app?user=Adnan-Zhaikh&theme=dark&background=0d1117&border=00FF9C&ring=00FF9C&fire=00FF9C&currStreakLabel=00FF9C&sideLabels=00FF9C&dates=c9d1d9)
+| STAT | VALUE |
+|:---:|:---:|
+| 🧑‍🎓 CLASS | Computer Science Student |
+| 🏫 GUILD | Ismail Yusuf College, Mumbai University |
+| 🎯 QUEST | Build software products → launch a digital agency |
+| 🌐 ALT ACCOUNT | [@clovrrhq](https://clovrr.gumroad.com) |
 
 </div>
 
----
+<br>
 
-## `> connect`
+## 🕹️ INVENTORY (Skills Unlocked)
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=00FF9C)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
-[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=00FF9C)](https://leetcode.com/Adnan-Zhaikh)
-[![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=00FF9C)](mailto:adnanibrahimshaikh@gmail.com)
+**⚔️ Languages**
+
+![Python](https://img.shields.io/badge/PYTHON-FFD700?style=for-the-badge&logo=python&logoColor=black)
+![Java](https://img.shields.io/badge/JAVA-FF6B6B?style=for-the-badge&logo=openjdk&logoColor=black)
+![C++](https://img.shields.io/badge/C%2B%2B-6BCB77?style=for-the-badge&logo=cplusplus&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JAVASCRIPT-FFE066?style=for-the-badge&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TYPESCRIPT-4D96FF?style=for-the-badge&logo=typescript&logoColor=black)
+
+**🛡️ Frameworks & Tools**
+
+![React](https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Next.js](https://img.shields.io/badge/NEXT.JS-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/POSTGRESQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/PRISMA-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![Git](https://img.shields.io/badge/GIT-F1502F?style=for-the-badge&logo=git&logoColor=white)
 
 </div>
 
----
+<br>
 
-<div align="center">
+## 🗺️ QUEST LOG
 
-```cpp
-while (!success) {
-    keepLearning();
-    buildProjects();
-    commitCode();
-}
+```
+╔═══════════════════════════════════════════════════════════╗
+║  ✅ COMPLETED QUESTS                                      ║
+║  ─────────────────────────────────────────────────────────║
+║  ✔ Learn Python, Java, C++, JavaScript, TypeScript        ║
+║  ✔ Learn React & Next.js                                  ║
+║  ✔ Ship first full-stack app                              ║
+║    → Course Tracker & Certificate Generator               ║
+║      (Next.js · PostgreSQL · Prisma · deployed on Vercel) ║
+╚═══════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════╗
+║  🔄 ACTIVE QUESTS                                         ║
+║  ─────────────────────────────────────────────────────────║
+║  ▶ Solve 100+ LeetCode problems           [████░░░░░░] 40% ║
+║  ▶ DSA logic building (daily)             [███░░░░░░░] 30% ║
+║  ▶ Data Science fundamentals (weekly)     [██░░░░░░░░] 20% ║
+╚═════════════════════════════════════════════════════════════╝
+
+╔═══════════════════════════════════════════════════════════╗
+║  🔒 LOCKED QUESTS                                         ║
+║  ─────────────────────────────────────────────────────────║
+║  □ Build a Java project (console/CLI)                     ║
+║  □ Build a Python project                                 ║
+║  □ Land a Software Developer Internship                   ║
+╚═══════════════════════════════════════════════════════════╝
 ```
 
-⭐ Thanks for stopping by!
+<br>
+
+## 📊 GITHUB STATS
+
+<div align="center">
+
+<img src="https://github-readme-streak-stats-eight.vercel.app?user=Adnan-Zhaikh&theme=radical&background=0d1117&border=FFD700&ring=FFD700&fire=FF6B6B&currStreakLabel=FFD700&sideLabels=FFD700&dates=c9d1d9&stroke=FFD700" alt="GitHub Streak" />
+
+<br>
+
+<img src="https://github-readme-stats.vercel.app/api?username=Adnan-Zhaikh&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=FFD700&icon_color=FF6B6B&text_color=c9d1d9" alt="GitHub Stats" />
 
 </div>
-````
+
+<br>
+
+## 🏆 ACHIEVEMENTS
+
+<div align="center">
+
+<img src="https://github-profile-trophy.vercel.app/?username=Adnan-Zhaikh&theme=radical&no-frame=true&margin-w=10&column=4" alt="trophies" />
+
+</div>
+
+<br>
+
+## 📡 MULTIPLAYER (Connect)
+
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-4D96FF?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
+[![LeetCode](https://img.shields.io/badge/LEETCODE-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/Adnan-Zhaikh)
+[![Gmail](https://img.shields.io/badge/EMAIL-FF6B6B?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adnanibrahimshaikh@gmail.com)
+
+</div>
+
+<br>
+
+<div align="center">
+
+```
+INSERT COIN TO CONTINUE ▸ ▸ ▸
+```
+
+⭐ **Thanks for visiting Player 1's profile!** ⭐
+
+</div>
