@@ -77,9 +77,9 @@ adnan = {
 [✓] Build full-stack web application
     → Course Tracker & Certificate Generator (Next.js, PostgreSQL, deployed)
 
-[~] Solve 100+ LeetCode problems        (daily)
-[~] DSA logic building                  (daily)
-[~] Data Science fundamentals           (weekly)
+[~] Solve 100+ LeetCode problems        
+[~] DSA logic building                  
+[~] Data Science fundamentals           
 
 [ ] Build a project in Java
 [ ] Build a project in Python
