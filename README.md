@@ -81,7 +81,7 @@ adnan = {
 [~] DSA logic building                  
 [~] Data Science fundamentals           
 
-[ ] Build a project in Java
+[✓] Build a project in Java
 [ ] Build a project in Python
 [ ] Land a Software Developer Internship
 ```
@@ -103,7 +103,7 @@ adnan = {
 <div align="center">
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=FF9F1C)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
-[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=FF9F1C)](https://leetcode.com/Adnan-Zhaikh)
+[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=FF9F1C)](https://leetcode.com/AdnanZhaikh)
 [![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=FF9F1C)](mailto:adnanibrahimshaikh@gmail.com)
 
 </div>
