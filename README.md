@@ -23,8 +23,9 @@
 adnan = {
     "degree"     : "BSc Computer Science",
     "languages"  : ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
-    "frameworks" : ["React", "Next.js"],
-    "databases"  : ["PostgreSQL", "MySQL"],
+    "frameworks" : ["React", "Next.js", "FastAPI"],
+    "databases"  : ["PostgreSQL", "MySQL", "SQLite"],
+    "tools"      : ["Prisma", "Vercel", "Neon", "Pillow"],
     "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
     "currently"  : "Solving LeetCode daily, building projects, learning DS weekly",
     "goal"       : "Ship real products and build a digital agency",
@@ -49,11 +50,19 @@ adnan = {
 
 ![React](https://img.shields.io/badge/React-0d1117?style=for-the-badge&logo=react&logoColor=FF9F1C)
 ![Next.js](https://img.shields.io/badge/Next.js-0d1117?style=for-the-badge&logo=nextdotjs&logoColor=FF9F1C)
+![FastAPI](https://img.shields.io/badge/FastAPI-0d1117?style=for-the-badge&logo=fastapi&logoColor=FF9F1C)
 
-### Databases
+### Databases & Data Tools
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0d1117?style=for-the-badge&logo=postgresql&logoColor=FF9F1C)
 ![MySQL](https://img.shields.io/badge/MySQL-0d1117?style=for-the-badge&logo=mysql&logoColor=FF9F1C)
+![SQLite](https://img.shields.io/badge/SQLite-0d1117?style=for-the-badge&logo=sqlite&logoColor=FF9F1C)
+![Prisma](https://img.shields.io/badge/Prisma-0d1117?style=for-the-badge&logo=prisma&logoColor=FF9F1C)
+
+### Deployment
+
+![Vercel](https://img.shields.io/badge/Vercel-0d1117?style=for-the-badge&logo=vercel&logoColor=FF9F1C)
+![Neon](https://img.shields.io/badge/Neon-0d1117?style=for-the-badge&logo=neon&logoColor=FF9F1C)
 
 ### Focus Areas
 
@@ -75,14 +84,19 @@ adnan = {
 [✓] Learn Python, Java, C++, JavaScript, TypeScript fundamentals
 [✓] Learn React, Next.js & TypeScript
 [✓] Build full-stack web application
-    → Course Tracker & Certificate Generator (Next.js, PostgreSQL, deployed)
-
-[~] Solve 100+ LeetCode problems        
-[~] DSA logic building                  
-[~] Data Science fundamentals           
+    → Course Tracker & Certificate Generator (Next.js, Prisma, PostgreSQL/Neon, Vercel)
 
 [✓] Build a project in Java
-[ ] Build a project in Python
+    → Text-based RPG Battle Simulator (OOP, Collections, file I/O)
+
+[✓] Build a project in Python
+    → side-quests CLI toolkit + ShrunkPy web app (file/image/PDF utilities)
+
+[~] Solve 100+ LeetCode problems
+[~] DSA logic building
+[~] Data Science fundamentals
+[~] Dead man's switch — FastAPI + SQLite goal-accountability tool
+
 [ ] Land a Software Developer Internship
 ```
 
@@ -102,6 +116,7 @@ adnan = {
 
 <div align="center">
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-0d1117?style=for-the-badge&logo=vercel&logoColor=FF9F1C)](https://adnan-portfolio-olive-one.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=FF9F1C)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
 [![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=FF9F1C)](https://leetcode.com/AdnanZhaikh)
 [![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=FF9F1C)](mailto:adnanibrahimshaikh@gmail.com)
