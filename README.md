@@ -28,7 +28,7 @@ adnan = {
     "tools"      : ["Prisma", "Vercel", "Neon", "Pillow"],
     "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
     "currently"  : "Solving LeetCode daily, building projects, learning DS weekly",
-    "goal"       : "Ship real products and build a digital agency",
+    "goal"       : "Ship real products.",
 }
 ```
 
@@ -62,7 +62,9 @@ adnan = {
 ### Deployment
 
 ![Vercel](https://img.shields.io/badge/Vercel-0d1117?style=for-the-badge&logo=vercel&logoColor=FF9F1C)
+![Render](https://img.shields.io/badge/Render-0d1117?style=for-the-badge&logo=render&logoColor=FF9F1C)
 ![Neon](https://img.shields.io/badge/Neon-0d1117?style=for-the-badge&logo=neon&logoColor=FF9F1C)
+![Supabase](https://img.shields.io/badge/Supabase-0d1117?style=for-the-badge&logo=supabase&logoColor=FF9F1C)
 
 ### Focus Areas
 
@@ -91,11 +93,11 @@ adnan = {
 
 [✓] Build a project in Python
     → side-quests CLI toolkit + ShrunkPy web app (file/image/PDF utilities)
+[✓] Dead man's switch — FastAPI + PostgreSQL goal-accountability tool
 
 [~] Solve 100+ LeetCode problems
 [~] DSA logic building
 [~] Data Science fundamentals
-[~] Dead man's switch — FastAPI + SQLite goal-accountability tool
 
 [ ] Land a Software Developer Internship
 ```
