@@ -23,9 +23,9 @@
 adnan = {
     "degree"     : "BSc Computer Science",
     "languages"  : ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
-    "frameworks" : ["React", "Next.js", "FastAPI"],
+    "frameworks" : ["React", "Next.js", "FastAPI", "Spring Boot"],
     "databases"  : ["PostgreSQL", "MySQL", "SQLite"],
-    "tools"      : ["Prisma", "Vercel", "Neon", "Pillow"],
+    "tools"      : ["Prisma", "Vercel", "Neon", "Docker", "Pillow"],
     "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
     "currently"  : "Solving LeetCode daily, building projects, learning DS weekly",
     "goal"       : "Ship real products.",
@@ -51,6 +51,7 @@ adnan = {
 ![React](https://img.shields.io/badge/React-0d1117?style=for-the-badge&logo=react&logoColor=FF9F1C)
 ![Next.js](https://img.shields.io/badge/Next.js-0d1117?style=for-the-badge&logo=nextdotjs&logoColor=FF9F1C)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0d1117?style=for-the-badge&logo=fastapi&logoColor=FF9F1C)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-0d1117?style=for-the-badge&logo=springboot&logoColor=FF9F1C)
 
 ### Databases & Data Tools
 
@@ -63,6 +64,7 @@ adnan = {
 
 ![Vercel](https://img.shields.io/badge/Vercel-0d1117?style=for-the-badge&logo=vercel&logoColor=FF9F1C)
 ![Render](https://img.shields.io/badge/Render-0d1117?style=for-the-badge&logo=render&logoColor=FF9F1C)
+![Docker](https://img.shields.io/badge/Docker-0d1117?style=for-the-badge&logo=docker&logoColor=FF9F1C)
 ![Neon](https://img.shields.io/badge/Neon-0d1117?style=for-the-badge&logo=neon&logoColor=FF9F1C)
 ![Supabase](https://img.shields.io/badge/Supabase-0d1117?style=for-the-badge&logo=supabase&logoColor=FF9F1C)
 
@@ -80,25 +82,24 @@ adnan = {
 
 ---
 
-## `> current_objectives`
+## `> ls projects/`
 
 ```bash
-[✓] Learn Python, Java, C++, JavaScript, TypeScript fundamentals
-[✓] Learn React, Next.js & TypeScript
-[✓] Build full-stack web application
-    → Course Tracker & Certificate Generator (Next.js, Prisma, PostgreSQL/Neon, Vercel)
+pingroom/                Real-time chat room — Spring Boot, WebSocket/STOMP, Docker, deployed on Render
+course-tracker/          Course tracker & certificate generator — Next.js, Prisma, PostgreSQL/Neon, Vercel
+rpg-battle-sim/          Text-based RPG battle simulator — Java, OOP, Collections, file I/O
+side-quests/             CLI toolkit + ShrunkPy web app — Python, file/image/PDF utilities
+deadmans-switch/         Goal-accountability check-in tool — FastAPI, PostgreSQL
+```
 
-[✓] Build a project in Java
-    → Text-based RPG Battle Simulator (OOP, Collections, file I/O)
+---
 
-[✓] Build a project in Python
-    → side-quests CLI toolkit + ShrunkPy web app (file/image/PDF utilities)
-[✓] Dead man's switch — FastAPI + PostgreSQL goal-accountability tool
+## `> status --in-progress`
 
-[~] Solve 100+ LeetCode problems
-[~] DSA logic building
+```bash
+[~] 100+ LeetCode problems
+[~] DSA, deeper
 [~] Data Science fundamentals
-
 [ ] Land a Software Developer Internship
 ```
 
