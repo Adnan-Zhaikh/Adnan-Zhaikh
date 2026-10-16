@@ -27,7 +27,7 @@ adnan = {
     "databases"  : ["PostgreSQL", "MySQL", "SQLite"],
     "tools"      : ["Prisma", "Vercel", "Neon", "Docker", "Pillow"],
     "focus"      : ["Data Structures & Algorithms", "Full-Stack Web Development", "Data Science"],
-    "currently"  : "Solving LeetCode daily, building projects, learning DS weekly",
+    "currently"  : "Building projects, learning DS weekly",
     "goal"       : "Ship real products.",
 }
 ```
