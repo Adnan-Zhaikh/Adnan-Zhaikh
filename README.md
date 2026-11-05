@@ -22,7 +22,7 @@
 ```python
 adnan = {
     "degree"     : "BSc Computer Science",
-    "languages"  : ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
+    "languages"  : ["Python", "Java", "JavaScript", "TypeScript", "HTML", "CSS"],
     "frameworks" : ["React", "Next.js", "FastAPI", "Spring Boot"],
     "databases"  : ["PostgreSQL", "MySQL", "SQLite"],
     "tools"      : ["Prisma", "Vercel", "Neon", "Docker", "Pillow"],
@@ -40,7 +40,6 @@ adnan = {
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=FF9F1C)
 ![Java](https://img.shields.io/badge/Java-0d1117?style=for-the-badge&logo=openjdk&logoColor=FF9F1C)
-![C++](https://img.shields.io/badge/C++-0d1117?style=for-the-badge&logo=cplusplus&logoColor=FF9F1C)
 ![JavaScript](https://img.shields.io/badge/JavaScript-0d1117?style=for-the-badge&logo=javascript&logoColor=FF9F1C)
 ![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=for-the-badge&logo=typescript&logoColor=FF9F1C)
 ![HTML5](https://img.shields.io/badge/HTML5-0d1117?style=for-the-badge&logo=html5&logoColor=FF9F1C)
