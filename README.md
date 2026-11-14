@@ -141,4 +141,4 @@ while (!success) {
 
 </div>
 
-![my pet](./pet.svg)
+<p align="center"> <img src="pet/chicken.svg" width="300" alt="My GitHub streak chicken" /> </p>
