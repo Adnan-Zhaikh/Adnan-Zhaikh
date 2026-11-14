@@ -140,3 +140,5 @@ while (!success) {
 ⭐ Thanks for stopping by!
 
 </div>
+
+![my pet](./pet.svg)
