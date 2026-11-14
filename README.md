@@ -67,11 +67,6 @@ adnan = {
 ![Neon](https://img.shields.io/badge/Neon-0d1117?style=for-the-badge&logo=neon&logoColor=FF9F1C)
 ![Supabase](https://img.shields.io/badge/Supabase-0d1117?style=for-the-badge&logo=supabase&logoColor=FF9F1C)
 
-### Focus Areas
-
-![DSA](https://img.shields.io/badge/Data_Structures_%26_Algorithms-0d1117?style=for-the-badge&logo=thealgorithms&logoColor=FF9F1C)
-![Problem Solving](https://img.shields.io/badge/Problem_Solving-0d1117?style=for-the-badge&logo=leetcode&logoColor=FF9F1C)
-![Web Development](https://img.shields.io/badge/Web_Development-0d1117?style=for-the-badge&logo=webflow&logoColor=FF9F1C)
 
 ### Tools
 
@@ -84,22 +79,12 @@ adnan = {
 ## `> ls projects/`
 
 ```bash
+portfolio/               Personal Portfolio and sharing my projects and about me
 pingroom/                Real-time chat room — Spring Boot, WebSocket/STOMP, Docker, deployed on Render
 course-tracker/          Course tracker & certificate generator — Next.js, Prisma, PostgreSQL/Neon, Vercel
-rpg-battle-sim/          Text-based RPG battle simulator — Java, OOP, Collections, file I/O
 side-quests/             CLI toolkit + ShrunkPy web app — Python, file/image/PDF utilities
-deadmans-switch/         Goal-accountability check-in tool — FastAPI, PostgreSQL
-```
-
----
-
-## `> status --in-progress`
-
-```bash
-[~] 100+ LeetCode problems
-[~] DSA, deeper
-[~] Data Science fundamentals
-[ ] Land a Software Developer Internship
+man-switch/              Goal-accountability check-in tool — FastAPI, PostgreSQL
+analytic-tool/           A tool to get instant stats, charts, and insights on Excel data
 ```
 
 ---
