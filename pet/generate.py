@@ -1,28 +1,48 @@
 #!/usr/bin/env python3
-"""GitHub streak chicken: an animated pixel-art pet that evolves with your contribution streak.
+"""GitHub streak chicken: an animated pixel-art pet that grows with your contribution streak.
 
-Writes pet/chicken.svg. Stages: Egg (0) > Chick (1) > Hen (7) > Rooster (30) > Phoenix (100).
+Writes pet/chicken.svg (640x360, 16:9) and keeps your record in pet/state.json.
+
+Story:  Egg > Chick (1) > Rooster (10) > Phoenix (40) > finds a wife (55) > nest (65)
+        > chicks (80) > 3rd chick (100) > chicks grow up (140) > the gang (200) > legendary (365)
+A broken streak is a hard reset to the egg; your best streak stays on the card.
 
 Usage:
-    python pet/generate.py              # fetch streak via GitHub API (env GH_TOKEN, GH_USER)
-    python pet/generate.py --streak 42  # render a specific streak (testing)
-    python pet/generate.py --all        # render every stage into pet/preview/
+    python pet/generate.py                     # fetch streak (env GH_TOKEN, GH_USER), update state
+    python pet/generate.py --streak 85         # render one streak for testing (state untouched)
+    python pet/generate.py --streak 0 --best 150
+    python pet/generate.py --all               # preview every stage into pet/preview/
 """
 import argparse, datetime as dt, json, os, urllib.request
 
 CELL = 10
-CW, CH = 32, 28          # canvas size in cells
-OX = 6                   # sprite x offset (sprites are 20 cells wide)
-GROUND = 26              # row the pets stand on
+W, H = 640, 360
+GROUND = 264                      # y (px) the birds stand on
+STATE_FILE = "pet/state.json"
+
+ACCENT, BG, TITLE, DIM = "#ff7a45", "#1c0f0c", "#ffe08a", "#d9a88a"
 
 PALETTE = {
-    "K": "#8a5428", "O": "#f2a23c", "D": "#c9701f", "L": "#ffe2b0",
-    "P": "#ff8fa3", "E": "#1b1b1b", "H": "#ffffff", "W": "#fff6e5",
-    "R": "#e5484d", "r": "#a82a30", "Y": "#ffd23f", "y": "#d49a12",
-    "B": "#7cc4ff", "b": "#3f8fd8", "S": "#14141c",
-    "A": "#ffb020", "Q": "#e08a1e", "g": "#e6cfa8", "F": "#ff6a2b", "N": "#6fcf6a",
-    "n": "#2c7a3e", "M": "#d9f5a8", "T": "#f2e2a0", "V": "#8a5cf6", "v": "#5b32b8", "q": "#2fb5a8",
+    "K": "#8a5428", "Y": "#ffd23f", "y": "#d49a12", "A": "#ffb020", "Q": "#e08a1e",
+    "P": "#ff8fa3", "E": "#1b1b1b", "H": "#ffffff", "W": "#fff6e5", "g": "#e6cfa8",
+    "L": "#ffe2b0", "R": "#e5484d", "r": "#a82a30", "S": "#14141c", "F": "#ff6a2b",
+    "q": "#2fb5a8", "V": "#8a5cf6", "v": "#5b32b8", "D": "#c9701f", "O": "#f2a23c",
+    "u": "#c98b45", "x": "#8a5a24",
 }
+PAL_ROOSTER = {"W": "#d9742e", "g": "#a14a1b", "L": "#f6c98a", "q": "#2fb5a8"}
+PAL_PHOENIX = {"W": "#ff8a2a", "g": "#ffd23f", "L": "#ffe08a", "q": "#ff5a1f", "K": "#a63a14",
+               "V": "#ff6a2b", "v": "#ffd23f", "R": "#ff3b30"}
+PAL_GOLD = {"W": "#ffd23f", "g": "#ffb020", "L": "#fff1a8", "q": "#ffb347", "K": "#8a5a1a",
+            "V": "#ffe066", "v": "#ff9f1c", "R": "#ff3b30"}
+PAL_EGG = {"W": "#f3dcb8", "O": "#d79a5a", "D": "#a56a35"}
+
+# (min_streak, title)
+STAGES = [
+    (0, "EGG"), (1, "CHICK"), (10, "ROOSTER"), (40, "PHOENIX"), (55, "THE COUPLE"),
+    (65, "THE NEST"), (80, "NEW CHICKS"), (100, "FAMILY"), (140, "GROWING UP"),
+    (200, "THE GANG"), (365, "LEGENDARY GANG"),
+]
+
 
 # ------------------------------------------------------------------ sprites
 def mirror(half):
@@ -35,9 +55,8 @@ EGG_HALF = [
     "....KK", "..KKWW", ".KWWWW", ".KWOOW", "KWWOOW", "KWWWWW", "KWWWDW",
     "KWWWWD", "KWOOWW", "KWOOWW", ".KWWWW", ".KWWWW", "..KKWW", "....KK",
 ]
-EGG = ["".join(r) + "".join(reversed(r)) for r in EGG_HALF]   # 12 wide
+EGG = ["".join(r) + "".join(reversed(r)) for r in EGG_HALF]       # 12 wide, 14 tall
 
-# ---- chicken
 CHICK = mirror([
     ".........K", "........KY", "....KKKKYY", "...KYYYYYY", "..KYYYYYYY",
     ".KYYYYYYYY", ".KYYEYYYYY", ".KYPEYYYAA", ".KYYYYYYYA", ".KYYYYYYYY",
@@ -51,23 +70,17 @@ HEN = mirror([
     "KWgggWLLLL", "KWWggWLLLL", ".KWWWWWWWW", "..KKKKKKKK", "....QQ....",
     "...QQQ....",
 ])
-HEN_SHADES = ["...SSSS......SSSS...", "..SSSSSSSSSSSSSSSS..", "...SHSS......SSHS..."]  # y=5
-HEN_SCARF = ["..RRRRRRRRRRRRRRRR..", "..rrrrrrrrrrrrrrrr..",
-             ".........RR.........", ".........Rr........."]  # y=12
+BOW = ["..PP.PP.............", "..PPRPP............."]
+SHADES = ["...SSSS......SSSS...", "..SSSSSSSSSSSSSSSS..", "...SHSS......SSHS..."]   # y=5
+SCARF = ["..RRRRRRRRRRRRRRRR..", "..rrrrrrrrrrrrrrrr..",
+         ".........RR.........", ".........Rr........."]                                  # y=12
 FAN = ["K....", "KqK..", "KqqK.", "KqYqK", "KqqqK", "KqYqK", ".KqqK", "..KKK"]
 FLAME = ["..........F.........", ".........FFF.F......", "........FFYYFFF....."]
-WING_S = ["v......", "vv.....", "vVv....", "vVVv...", "vVVVvv.", ".vVVVVv", "..vvvvv"]
-
-PAL_ROOSTER = {"W": "#d9742e", "g": "#a14a1b", "L": "#f6c98a", "q": "#2fb5a8"}
-PAL_PHOENIX = {"W": "#ff8a2a", "g": "#ffd23f", "L": "#ffe08a", "q": "#ff5a1f", "K": "#a63a14",
-               "V": "#ff6a2b", "v": "#ffd23f", "R": "#ff3b30"}
-# ------------------------------------------------------------------ pets
-PETS = {
-    "chicken": dict(
-        stages=[(0, "EGG", 1), (1, "CHICK", 7), (7, "HEN", 30), (30, "ROOSTER", 100), (100, "PHOENIX", None)],
-        bg="#1c0f0c", accent="#ff7a45", title="#ffe08a", dim="#d9a88a", spark="#ffb347",
-        egg={"W": "#f3dcb8", "O": "#d79a5a", "D": "#a56a35"}),
-}
+WING = ["v......", "vv.....", "vVv....", "vVVv...", "vVVVvv.", ".vVVVVv", "..vvvvv"]
+CROWN = ["......Y..YY..Y......", "......YYYYYYYY......", "......YyYyyYyY......"]
+NEST = ["..KKKKKKKKKKKK..", ".KuuuuuuuuuuuuK.", "KuuxuuuuxuuuuxuK",
+        "KuuuuxuuuuuxuuuK", ".KuuuuuuuuuuuuK.", "..KKKKKKKKKKKK.."]
+HEART = [".PP.PP.", "PPPPPPP", "PPPPPPP", ".PPPPP.", "..PPP..", "...P..."]
 
 
 def px(grid, ox=0, oy=0, only=None):
@@ -82,126 +95,200 @@ def rects(pixels, pal):
         for x, y, c in pixels)
 
 
+def L(grid, x, y, pal, cls=None, only=None):
+    return (f'<g class="{cls}">' if cls else "<g>") + rects(px(grid, x, y, only), pal) + "</g>"
+
+
 def flip(grid):
     return [r[::-1] for r in grid]
 
 
-def stage_for(pet, streak):
-    return max(i for i, s in enumerate(PETS[pet]["stages"]) if streak >= s[0])
+# ------------------------------------------------------------------ figures
+def bird(kind, crown=False):
+    """Return (svg parts, sprite rows, shadow half-width in px at scale 1)."""
+    pal = {**PALETTE}
+    if kind == "chick":
+        return (L(CHICK, 0, 0, pal, only=set("KYyAPQ")) + L(CHICK, 0, 0, pal, "eyes", only="E"), 17, 52)
+    if kind in ("hen", "teen_hen"):
+        parts = L(HEN, 0, 0, pal, only=set("KWgLRAQ")) + L(HEN, 0, 0, pal, "eyes", only="E")
+        if kind == "hen":
+            parts += L(BOW, 0, 1, pal)
+        return parts, 21, 62
+    pal = {**PALETTE, **{"rooster": PAL_ROOSTER, "teen_rooster": PAL_ROOSTER,
+                         "phoenix": PAL_PHOENIX, "golden": PAL_GOLD}[kind]}
+    fiery = kind in ("phoenix", "golden")
+    p = []
+    if fiery:
+        p.append(L(WING, -4, 4, pal, "wingL"))
+        p.append(L(flip(WING), 17, 4, pal, "wingR"))
+    if kind != "teen_rooster":
+        p.append(L(FAN, -3, 5, pal)); p.append(L(flip(FAN), 18, 5, pal))
+    p.append(L(HEN, 0, 0, pal, only=set("KWgLRAQ")))
+    if kind == "teen_rooster":
+        p.append(L(HEN, 0, 0, pal, "eyes", only="E"))
+    else:
+        p.append(L(SHADES, 0, 5, pal)); p.append(L(SCARF, 0, 12, pal))
+    if crown:
+        p.append(L(CROWN, 0, -1, pal))
+    elif fiery:
+        p.append(L(FLAME, 0, -1, pal))
+    return "".join(p), 21, 62
 
 
-def sprite(pet, stage):
-    """Return (svg, shadow_rx)."""
-    P = lambda extra=None: {**PALETTE, **(extra or {})}
-    L = lambda grid, x, y, pal, cls=None, only=None: (
-        (f'<g class="{cls}">' if cls else "<g>") + rects(px(grid, x, y, only), pal) + "</g>")
+def place(kind, cx, s, delay=0.0, crown=False):
+    parts, rows, rx = bird(kind, crown)
+    tx, ty = cx - 100 * s, GROUND - rows * CELL * s
+    return (f'<ellipse cx="{cx}" cy="{GROUND + 2}" rx="{rx * s:.1f}" ry="{6 * s + 2:.1f}" fill="#000" opacity=".4"/>'
+            f'<g transform="translate({tx:.1f},{ty:.1f}) scale({s})">'
+            f'<g class="bob" style="animation-delay:{delay}s">{parts}</g></g>')
+
+
+def egg(cx, s, ground=GROUND, wobble=True, delay=0.0):
+    pal = {**PALETTE, **PAL_EGG}
+    tx, ty = cx - 60 * s, ground - 14 * CELL * s
+    cls = "wobble" if wobble else ""
+    return (f'<g transform="translate({tx:.1f},{ty:.1f}) scale({s})">'
+            f'<g class="{cls}" style="animation-delay:{delay}s">{rects(px(EGG), pal)}</g></g>')
+
+
+def egg_shadow(cx, s):
+    return f'<ellipse cx="{cx}" cy="{GROUND + 2}" rx="{45 * s:.1f}" ry="{6 * s + 2:.1f}" fill="#000" opacity=".4"/>'
+
+
+def nest(cx):
+    s = 0.7
+    pal = {**PALETTE}
+    base = GROUND - 6 * CELL * s
+    eggs = egg(cx - 24, 0.45, ground=base + 22, delay=0) + egg(cx + 24, 0.45, ground=base + 22, delay=.5)
+    body = f'<g transform="translate({cx - 8 * CELL * s:.1f},{base:.1f}) scale({s})">{rects(px(NEST), pal)}</g>'
+    return (f'<ellipse cx="{cx}" cy="{GROUND + 2}" rx="{60}" ry="6" fill="#000" opacity=".4"/>' + eggs + body)
+
+
+def heart(cx, y, delay):
+    pal = {**PALETTE}
+    return (f'<g transform="translate({cx - 21},{y})"><g class="heart" style="animation-delay:{delay}s">'
+            f'<g transform="scale(.6)">{rects(px(HEART), pal)}</g></g></g>')
+
+
+def scene(stage):
     if stage == 0:
-        pal = P(PETS[pet]["egg"])
-        return (f'<g transform="translate({(CW - 12) // 2 * CELL},{(GROUND - 14) * CELL})">'
-                f'<g class="wobble">{rects(px(EGG), pal)}</g></g>'), 45
-
-    parts, pal, rx = [], P(), 62
-    if pet == "chicken":
-        if stage == 1:
-            base, rx = CHICK, 52
-            parts.append(L(base, 0, 0, pal, only=set("KYyAPQ")))
-            parts.append(L(base, 0, 0, pal, "eyes", only="E"))
-        else:
-            base = HEN
-            if stage == 3: pal = P(PAL_ROOSTER)
-            if stage == 4: pal = P(PAL_PHOENIX)
-            if stage >= 3:
-                parts.append(L(FAN, -3, 5, pal)); parts.append(L(flip(FAN), 18, 5, pal))
-            if stage == 4:
-                parts.insert(0, L(WING_S, -4, 4, pal, "wingL"))
-                parts.insert(1, L(flip(WING_S), 17, 4, pal, "wingR"))
-            parts.append(L(base, 0, 0, pal, only=set("KWgLRAQ")))
-            if stage < 3:
-                parts.append(L(base, 0, 0, pal, "eyes", only="E"))
-            else:
-                parts += [L(HEN_SHADES, 0, 5, pal), L(HEN_SCARF, 0, 12, pal)]
-            if stage == 4:
-                parts.append(L(FLAME, 0, -1, pal))
-    H = len(base)
-    return (f'<g transform="translate({OX * CELL},{(GROUND - H) * CELL})">'
-            f'<g class="bob">{"".join(parts)}</g></g>'), rx
+        return egg_shadow(320, 1.3) + egg(320, 1.3)
+    if stage == 1:
+        return place("chick", 320, 1.1)
+    if stage == 2:
+        return place("rooster", 320, 1.0)
+    if stage == 3:
+        return place("phoenix", 320, 0.95)
+    if stage == 4:
+        return (place("phoenix", 205, .85) + place("hen", 440, .8, .3)
+                + heart(330, 130, 0) + heart(355, 150, 1.0) + heart(305, 160, 1.7))
+    parents = place("phoenix", 118, .7) + place("hen", 520, .72, .3)
+    if stage == 5:
+        return parents + nest(320)
+    if stage == 6:
+        return parents + place("chick", 280, .5, .1) + place("chick", 360, .5, .5)
+    if stage == 7:
+        return (parents + place("chick", 247, .45, .1) + place("chick", 320, .45, .5)
+                + place("chick", 393, .45, .9))
+    if stage == 8:
+        return (parents + place("teen_rooster", 247, .42, .1) + place("teen_hen", 320, .42, .5)
+                + place("teen_rooster", 393, .42, .9))
+    kind = "phoenix" if stage == 9 else "golden"
+    side = "rooster" if stage == 9 else "golden"
+    return (place(side, 125, .75, .2) + place(kind, 515, .75, .6)
+            + place(kind, 320, .95, 0, crown=(stage == 10)))
 
 
-def sparkles(stage, color):
-    if stage < 2:
+# ------------------------------------------------------------------ card
+def stage_for(streak):
+    return max(i for i, s in enumerate(STAGES) if streak >= s[0])
+
+
+def days(n):
+    return f"{n} DAY{'S' if n != 1 else ''}"
+
+
+def sparkles(stage):
+    if stage < 3:
         return ""
-    spots = [(3, 19), (28, 18), (4, 25), (27, 24)][: stage]
-    s = ""
+    spots = [(45, 110), (595, 100), (40, 215), (600, 215), (320, 78)][: 2 + stage // 3 + (1 if stage >= 9 else 0)]
+    out = ""
     for i, (x, y) in enumerate(spots):
         def r(dx, dy, o):
-            return (f'<rect x="{(x + dx) * CELL}" y="{(y + dy) * CELL}" width="{CELL}" '
-                    f'height="{CELL}" fill="{color}" opacity="{o}"/>')
-        s += (f'<g class="spark" style="animation-delay:{i * 0.4}s">'
-              + r(0, 0, 1) + r(-1, 0, .5) + r(1, 0, .5) + r(0, -1, .5) + r(0, 1, .5) + '</g>')
-    return s
+            return f'<rect x="{x + dx * 8}" y="{y + dy * 8}" width="8" height="8" fill="#ffb347" opacity="{o}"/>'
+        out += (f'<g class="spark" style="animation-delay:{i * .4}s">'
+                + r(0, 0, 1) + r(-1, 0, .5) + r(1, 0, .5) + r(0, -1, .5) + r(0, 1, .5) + "</g>")
+    return out
 
 
-def progress_bar(cfg, streak, stage, y, W):
-    stages = cfg["stages"]
-    lo, _, nxt = stages[stage]
-    segs, width, x0 = 14, W - 60, 30
+def ground_strip():
+    tufts = "".join(
+        f'<rect x="{x}" y="{GROUND + 8}" width="4" height="4" fill="#3f6b2a"/>'
+        f'<rect x="{x + 6}" y="{GROUND + 10}" width="4" height="2" fill="#2d5220"/>'
+        for x in range(30, 620, 46))
+    return f'<rect x="14" y="{GROUND + 12}" width="{W - 28}" height="6" fill="#2a1a12"/>' + tufts
+
+
+def hud(streak, best, stage):
+    lo = STAGES[stage][0]
+    nxt = STAGES[stage + 1] if stage + 1 < len(STAGES) else None
+    segs, x0, bw = 20, 30, 400
     if nxt is None:
         filled, label = segs, "MAX LEVEL REACHED"
     else:
-        filled = int(segs * (streak - lo) / (nxt - lo))
-        left = nxt - streak
-        label = f"{left} DAY{'S' if left != 1 else ''} TO {stages[stage + 1][1]}"
-    sw = width / segs
+        filled = int(segs * (streak - lo) / (nxt[0] - lo))
+        label = f"{days(nxt[0] - streak)} TO {nxt[1]}"
+    sw = bw / segs
     bar = "".join(
-        f'<rect x="{x0 + i * sw + 1:.1f}" y="{y}" width="{sw - 2:.1f}" height="10" '
-        f'fill="{cfg["accent"] if i < filled else "#2c2433"}"/>' for i in range(segs))
-    return bar + f'<text x="{W // 2}" y="{y + 26}" text-anchor="middle" class="sm">{label}</text>'
+        f'<rect x="{x0 + i * sw + 1:.1f}" y="306" width="{sw - 2:.1f}" height="12" '
+        f'fill="{ACCENT if i < filled else "#2c2433"}"/>' for i in range(segs))
+    if streak == 0:
+        msg = "STREAK BROKE! COMMIT TO HATCH" if best > 0 else "COMMIT TODAY TO HATCH ME"
+    else:
+        msg = f"{streak}-DAY STREAK"
+    live = streak > 0 and streak >= best
+    return (f'<text x="{x0}" y="296" class="sm">{msg}</text>{bar}'
+            f'<text x="{x0}" y="338" class="sm">{label}</text>'
+            f'<rect x="470" y="288" width="140" height="56" rx="6" fill="#26140f" stroke="{ACCENT}" stroke-width="2"/>'
+            f'<text x="540" y="308" text-anchor="middle" class="sm">{"PERSONAL BEST" if live else "BEST STREAK"}</text>'
+            f'<text x="540" y="332" text-anchor="middle" class="best">{days(best)}</text>')
 
 
-def css(cfg):
-    return (
-        "text{font-family:'Courier New',monospace;font-weight:bold;letter-spacing:1px}"
-        f".t{{font-size:18px;fill:{cfg['title']}}}.sm{{font-size:11px;fill:{cfg['dim']}}}"
-        f".m{{font-size:13px;fill:{cfg['accent']}}}"
-        ".bob{animation:bob 1.2s steps(1,end) infinite}"
-        "@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-5px)}}"
-        ".wobble{transform-box:fill-box;transform-origin:50% 100%;animation:wob 2s ease-in-out infinite}"
-        "@keyframes wob{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-7deg)}80%{transform:rotate(7deg)}}"
-        ".tail{transform-box:fill-box;transform-origin:0 100%;animation:wag 1.4s ease-in-out infinite}"
-        "@keyframes wag{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}"
-        ".eyes{transform-box:fill-box;transform-origin:center;animation:blink 4s infinite}"
-        "@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}"
-        ".wingL{transform-box:fill-box;transform-origin:100% 100%;animation:fl 1s ease-in-out infinite}"
-        ".wingR{transform-box:fill-box;transform-origin:0 100%;animation:fr 1s ease-in-out infinite}"
-        "@keyframes fl{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg)}}"
-        "@keyframes fr{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}"
-        ".spark{animation:tw 1.6s ease-in-out infinite}"
-        "@keyframes tw{0%,100%{opacity:0}50%{opacity:1}}"
-    )
+CSS = (
+    "text{font-family:'Courier New',monospace;font-weight:bold;letter-spacing:1px}"
+    f".t{{font-size:22px;fill:{TITLE}}}.d{{font-size:20px;fill:{ACCENT}}}"
+    f".sm{{font-size:12px;fill:{DIM}}}.best{{font-size:16px;fill:{TITLE}}}"
+    ".bob{animation:bob 1.2s steps(1,end) infinite}"
+    "@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-5px)}}"
+    ".wobble{transform-box:fill-box;transform-origin:50% 100%;animation:wob 2s ease-in-out infinite}"
+    "@keyframes wob{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-7deg)}80%{transform:rotate(7deg)}}"
+    ".eyes{transform-box:fill-box;transform-origin:center;animation:blink 4s infinite}"
+    "@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}"
+    ".wingL{transform-box:fill-box;transform-origin:100% 100%;animation:fl 1s ease-in-out infinite}"
+    ".wingR{transform-box:fill-box;transform-origin:0 100%;animation:fr 1s ease-in-out infinite}"
+    "@keyframes fl{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg)}}"
+    "@keyframes fr{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}"
+    ".spark{animation:tw 1.6s ease-in-out infinite}"
+    "@keyframes tw{0%,100%{opacity:0}50%{opacity:1}}"
+    ".heart{animation:hv 2.4s ease-in-out infinite;opacity:0}"
+    "@keyframes hv{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(-34px);opacity:0}}"
+)
 
 
-def render(pet, streak):
-    cfg = PETS[pet]
-    stage = stage_for(pet, streak)
-    name = cfg["stages"][stage][1]
-    W, H = CW * CELL, CH * CELL + 100
-    msg = "STREAK BROKE! COMMIT TO HATCH" if streak == 0 else f"{streak}-DAY STREAK"
-    body, rx = sprite(pet, stage)
+def render(streak, best=None):
+    best = streak if best is None else max(best, streak)
+    stage = stage_for(streak)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
-<style>{css(cfg)}</style>
-<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="10" fill="{cfg['bg']}" stroke="{cfg['accent']}" stroke-width="3"/>
-<rect x="8" y="8" width="{W - 16}" height="{H - 16}" rx="6" fill="none" stroke="#2c2433" stroke-width="2" stroke-dasharray="4 4"/>
-<text x="{W // 2}" y="28" text-anchor="middle" class="t">{name}</text>
-{sparkles(stage, cfg['spark'])}
-<ellipse cx="{W // 2}" cy="{GROUND * CELL + 2}" rx="{rx}" ry="7" fill="#000" opacity=".4"/>
-{body}
-<text x="{W // 2}" y="{CH * CELL + 22}" text-anchor="middle" class="m">DAY {streak}</text>
-<text x="{W // 2}" y="{CH * CELL + 40}" text-anchor="middle" class="sm">{msg}</text>
-{progress_bar(cfg, streak, stage, CH * CELL + 52, W)}
+<style>{CSS}</style>
+<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="12" fill="{BG}" stroke="{ACCENT}" stroke-width="3"/>
+<rect x="9" y="9" width="{W - 18}" height="{H - 18}" rx="7" fill="none" stroke="#2c2433" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="30" y="36" class="t">{STAGES[stage][1]}</text>
+<text x="{W - 30}" y="36" text-anchor="end" class="d">DAY {streak}</text>
+{sparkles(stage)}{ground_strip()}{scene(stage)}{hud(streak, best, stage)}
 </svg>'''
 
 
-# ------------------------------------------------------------------ streak
+# ------------------------------------------------------------------ streak + record
 QUERY = ("query($u:String!,$f:DateTime!,$t:DateTime!){user(login:$u){"
          "contributionsCollection(from:$f,to:$t){contributionCalendar{weeks{"
          "contributionDays{date contributionCount}}}}}}")
@@ -235,20 +322,32 @@ def fetch_streak(user, token):
     return streak
 
 
+def load_best():
+    try:
+        return int(json.load(open(STATE_FILE))["best"])
+    except (OSError, ValueError, KeyError):
+        return 0
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--streak", type=int)
-    ap.add_argument("--all", action="store_true", help="write preview SVGs for every stage")
-    ap.add_argument("--outdir", default="pet")
+    ap.add_argument("--streak", type=int, help="render this streak (testing; state file untouched)")
+    ap.add_argument("--best", type=int, default=None)
+    ap.add_argument("--all", action="store_true", help="write a preview of every stage")
+    ap.add_argument("--out", default="pet/chicken.svg")
     a = ap.parse_args()
     if a.all:
         os.makedirs("pet/preview", exist_ok=True)
-        for s in (0, 3, 12, 45, 150):
-            open(f"pet/preview/chicken_{stage_for('chicken', s)}_day{s}.svg", "w").write(render("chicken", s))
+        for i, (lo, name) in enumerate(STAGES):
+            s = lo
+            best = 150 if lo == 0 else s
+            open(f"pet/preview/{i:02d}_{name.lower().replace(' ', '_')}.svg", "w").write(render(s, best))
+    elif a.streak is not None:
+        open(a.out, "w").write(render(a.streak, a.best))
     else:
-        streak = a.streak if a.streak is not None else fetch_streak(os.environ["GH_USER"], os.environ["GH_TOKEN"])
-        os.makedirs(a.outdir, exist_ok=True)
-        open(os.path.join(a.outdir, "chicken.svg"), "w").write(render("chicken", streak))
-        print(f"streak={streak} stage={PETS['chicken']['stages'][stage_for('chicken', streak)][1]}")
+        streak = fetch_streak(os.environ["GH_USER"], os.environ["GH_TOKEN"])
+        best = max(load_best(), streak)
+        os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+        json.dump({"best": best}, open(STATE_FILE, "w"))
+        open(a.out, "w").write(render(streak, best))
+        print(f"streak={streak} best={best} stage={STAGES[stage_for(streak)][1]}")

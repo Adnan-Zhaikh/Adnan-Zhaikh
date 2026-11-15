@@ -126,4 +126,4 @@ while (!success) {
 
 </div>
 
-<p align="center"> <img src="pet/chicken.svg" width="300" alt="My GitHub streak chicken" /> </p>
+<p align="center"> <img src="pet/chicken.svg" width="640" alt="My GitHub streak chicken" /> </p>
