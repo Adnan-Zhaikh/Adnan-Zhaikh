@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """GitHub streak chicken: an animated pixel-art pet that grows with your contribution streak.
 
-Writes pet/chicken.svg (640x360, 16:9) and keeps your record in pet/state.json.
+Writes pet/chicken.svg (640x360, 16:9). Your personal best (length + dates) is found by scanning
+your whole contribution history, and cached in pet/state.json.
 
 Story:  Egg > Chick (1) > Rooster (10) > Phoenix (40) > finds a wife (55) > nest (65)
         > chicks (80) > 3rd chick (100) > chicks grow up (140) > the gang (200) > legendary (365)
@@ -10,7 +11,7 @@ A broken streak is a hard reset to the egg; your best streak stays on the card.
 Usage:
     python pet/generate.py                     # fetch streak (env GH_TOKEN, GH_USER), update state
     python pet/generate.py --streak 85         # render one streak for testing (state untouched)
-    python pet/generate.py --streak 0 --best 150
+    python pet/generate.py --streak 0 --best 150 --best-start 2026-11-01 --best-end 2027-03-30
     python pet/generate.py --all               # preview every stage into pet/preview/
 """
 import argparse, datetime as dt, json, os, urllib.request
@@ -229,10 +230,16 @@ def ground_strip():
     return f'<rect x="14" y="{GROUND + 12}" width="{W - 28}" height="6" fill="#2a1a12"/>' + tufts
 
 
-def hud(streak, best, stage):
+def fmt_date(iso):
+    d = dt.date.fromisoformat(iso)
+    return f"{d.day}-{d.month}-{d.year % 100:02d}"        # e.g. 1-11-26
+
+
+def hud(streak, rec, stage):
+    best = rec["best"]
     lo = STAGES[stage][0]
     nxt = STAGES[stage + 1] if stage + 1 < len(STAGES) else None
-    segs, x0, bw = 20, 30, 400
+    segs, x0, bw = 20, 30, 360
     if nxt is None:
         filled, label = segs, "MAX LEVEL REACHED"
     else:
@@ -247,17 +254,22 @@ def hud(streak, best, stage):
     else:
         msg = f"{streak}-DAY STREAK"
     live = streak > 0 and streak >= best
+    dates = ""
+    if rec.get("start"):
+        end = "NOW" if live else (fmt_date(rec["end"]) if rec.get("end") else "?")
+        dates = f"{fmt_date(rec['start'])} to {end}"
     return (f'<text x="{x0}" y="296" class="sm">{msg}</text>{bar}'
             f'<text x="{x0}" y="338" class="sm">{label}</text>'
-            f'<rect x="470" y="288" width="140" height="56" rx="6" fill="#26140f" stroke="{ACCENT}" stroke-width="2"/>'
-            f'<text x="540" y="308" text-anchor="middle" class="sm">{"PERSONAL BEST" if live else "BEST STREAK"}</text>'
-            f'<text x="540" y="332" text-anchor="middle" class="best">{days(best)}</text>')
+            f'<rect x="410" y="280" width="200" height="68" rx="6" fill="#26140f" stroke="{ACCENT}" stroke-width="2"/>'
+            f'<text x="510" y="299" text-anchor="middle" class="sm">{"PERSONAL BEST" if live else "BEST STREAK"}</text>'
+            f'<text x="510" y="320" text-anchor="middle" class="best">{days(best)}</text>'
+            f'<text x="510" y="338" text-anchor="middle" class="dt">{dates}</text>')
 
 
 CSS = (
     "text{font-family:'Courier New',monospace;font-weight:bold;letter-spacing:1px}"
     f".t{{font-size:22px;fill:{TITLE}}}.d{{font-size:20px;fill:{ACCENT}}}"
-    f".sm{{font-size:12px;fill:{DIM}}}.best{{font-size:16px;fill:{TITLE}}}"
+    f".sm{{font-size:12px;fill:{DIM}}}.best{{font-size:16px;fill:{TITLE}}}.dt{{font-size:11px;fill:{DIM}}}"
     ".bob{animation:bob 1.2s steps(1,end) infinite}"
     "@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-5px)}}"
     ".wobble{transform-box:fill-box;transform-origin:50% 100%;animation:wob 2s ease-in-out infinite}"
@@ -275,8 +287,9 @@ CSS = (
 )
 
 
-def render(streak, best=None):
-    best = streak if best is None else max(best, streak)
+def render(streak, rec=None):
+    rec = dict(rec or {})
+    rec["best"] = max(int(rec.get("best") or 0), streak)
     stage = stage_for(streak)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <style>{CSS}</style>
@@ -284,70 +297,111 @@ def render(streak, best=None):
 <rect x="9" y="9" width="{W - 18}" height="{H - 18}" rx="7" fill="none" stroke="#2c2433" stroke-width="2" stroke-dasharray="4 4"/>
 <text x="30" y="36" class="t">{STAGES[stage][1]}</text>
 <text x="{W - 30}" y="36" text-anchor="end" class="d">DAY {streak}</text>
-{sparkles(stage)}{ground_strip()}{scene(stage)}{hud(streak, best, stage)}
+{sparkles(stage)}{ground_strip()}{scene(stage)}{hud(streak, rec, stage)}
 </svg>'''
 
 
 # ------------------------------------------------------------------ streak + record
-QUERY = ("query($u:String!,$f:DateTime!,$t:DateTime!){user(login:$u){"
-         "contributionsCollection(from:$f,to:$t){contributionCalendar{weeks{"
-         "contributionDays{date contributionCount}}}}}}")
+GQL = "https://api.github.com/graphql"
+Q_CREATED = "query($u:String!){user(login:$u){createdAt}}"
+Q_CALENDAR = ("query($u:String!,$f:DateTime!,$t:DateTime!){user(login:$u){"
+              "contributionsCollection(from:$f,to:$t){contributionCalendar{weeks{"
+              "contributionDays{date contributionCount}}}}}}")
 
 
-def fetch_counts(user, token, start, end):
-    body = json.dumps({"query": QUERY, "variables": {
-        "u": user, "f": f"{start}T00:00:00Z", "t": f"{end}T23:59:59Z"}}).encode()
-    req = urllib.request.Request("https://api.github.com/graphql", body, {
+def gql(query, variables, token):
+    body = json.dumps({"query": query, "variables": variables}).encode()
+    req = urllib.request.Request(GQL, body, {
         "Authorization": f"bearer {token}", "Content-Type": "application/json"})
-    data = json.load(urllib.request.urlopen(req))
-    weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-    return {d["date"]: d["contributionCount"] for w in weeks for d in w["contributionDays"]}
+    return json.load(urllib.request.urlopen(req))
 
 
-def fetch_streak(user, token):
-    """Consecutive days with >=1 contribution, ending today (or yesterday if today is empty)."""
+def fetch_history(user, token):
+    """Contribution counts for every day since the account was created (one request per year)."""
     today = dt.datetime.now(dt.timezone.utc).date()
-    counts, end = {}, today
-    for _ in range(4):                      # API caps one query at a year; look back up to ~4 years
-        start = end - dt.timedelta(days=364)
-        counts.update(fetch_counts(user, token, start, end))
-        if any(c == 0 for d, c in counts.items() if d < str(today)):
-            break                           # found a gap, no need to go further back
-        end = start - dt.timedelta(days=1)
-    day = today if counts.get(str(today), 0) else today - dt.timedelta(days=1)
-    streak = 0
+    created = dt.date.fromisoformat(
+        gql(Q_CREATED, {"u": user}, token)["data"]["user"]["createdAt"][:10])
+    counts, start = {}, created
+    while start <= today:
+        end = min(start + dt.timedelta(days=364), today)   # API allows at most one year per query
+        data = gql(Q_CALENDAR, {"u": user, "f": f"{start}T00:00:00Z", "t": f"{end}T23:59:59Z"}, token)
+        weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+        for w in weeks:
+            for d in w["contributionDays"]:
+                counts[d["date"]] = max(counts.get(d["date"], 0), d["contributionCount"])
+        start = end + dt.timedelta(days=1)
+    return counts, today
+
+
+def analyze(counts, today):
+    """Return (current_streak, (best_length, best_start, best_end)). Ties go to the most recent run."""
+    one = dt.timedelta(days=1)
+    best, run, start, last = (0, None, None), 0, None, None
+    for ds in sorted(counts):
+        d = dt.date.fromisoformat(ds)
+        if d > today:
+            break
+        if counts[ds] > 0:
+            if run and last == d - one:
+                run += 1
+            else:
+                run, start = 1, d
+            last = d
+            if run >= best[0]:
+                best = (run, start, d)
+        else:
+            run = 0
+    day = today if counts.get(str(today), 0) else today - one   # grace: today isn't over yet
+    current = 0
     while counts.get(str(day), 0) > 0:
-        streak += 1
-        day -= dt.timedelta(days=1)
-    return streak
+        current += 1
+        day -= one
+    return current, best
 
 
-def load_best():
+def load_state():
     try:
-        return int(json.load(open(STATE_FILE))["best"])
-    except (OSError, ValueError, KeyError):
-        return 0
+        st = json.load(open(STATE_FILE))
+        return {"best": int(st.get("best", 0)), "start": st.get("start"), "end": st.get("end")}
+    except (OSError, ValueError, TypeError):
+        return {"best": 0, "start": None, "end": None}
+
+
+def merge_record(state, best):
+    """Keep whichever record is longer: the one found in history or the one cached in state.json."""
+    n, start, end = best
+    if n and n >= state["best"]:
+        return {"best": n, "start": str(start), "end": str(end)}
+    return state
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--streak", type=int, help="render this streak (testing; state file untouched)")
     ap.add_argument("--best", type=int, default=None)
+    ap.add_argument("--best-start", default=None, help="YYYY-MM-DD")
+    ap.add_argument("--best-end", default=None, help="YYYY-MM-DD")
     ap.add_argument("--all", action="store_true", help="write a preview of every stage")
     ap.add_argument("--out", default="pet/chicken.svg")
     a = ap.parse_args()
     if a.all:
         os.makedirs("pet/preview", exist_ok=True)
         for i, (lo, name) in enumerate(STAGES):
-            s = lo
-            best = 150 if lo == 0 else s
-            open(f"pet/preview/{i:02d}_{name.lower().replace(' ', '_')}.svg", "w").write(render(s, best))
+            if lo == 0:      # egg after a broken streak: shows the record that was lost
+                rec = {"best": 150, "start": "2026-11-01", "end": "2027-03-30"}
+            else:
+                rec = {"best": lo, "start": "2026-11-01", "end": None}
+            open(f"pet/preview/{i:02d}_{name.lower().replace(' ', '_')}.svg", "w").write(render(lo, rec))
     elif a.streak is not None:
-        open(a.out, "w").write(render(a.streak, a.best))
+        rec = {"best": a.best if a.best is not None else a.streak,
+               "start": a.best_start, "end": a.best_end}
+        open(a.out, "w").write(render(a.streak, rec))
     else:
-        streak = fetch_streak(os.environ["GH_USER"], os.environ["GH_TOKEN"])
-        best = max(load_best(), streak)
+        counts, today = fetch_history(os.environ["GH_USER"], os.environ["GH_TOKEN"])
+        streak, best = analyze(counts, today)
+        rec = merge_record(load_state(), best)
         os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
-        json.dump({"best": best}, open(STATE_FILE, "w"))
-        open(a.out, "w").write(render(streak, best))
-        print(f"streak={streak} best={best} stage={STAGES[stage_for(streak)][1]}")
+        json.dump(rec, open(STATE_FILE, "w"))
+        open(a.out, "w").write(render(streak, rec))
+        print(f"streak={streak} best={rec['best']} ({rec['start']} to {rec['end']}) "
+              f"stage={STAGES[stage_for(streak)][1]}")
