@@ -72,7 +72,6 @@ Take a look around. Everything I'm building lives in my repositories.
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-0d1117?style=for-the-badge&logo=vercel&logoColor=FF9F1C)](https://adnan-portfolio-olive-one.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=FF9F1C)](https://www.linkedin.com/in/adnan-shaikh-4763233b2)
-[![LeetCode](https://img.shields.io/badge/LeetCode-0d1117?style=for-the-badge&logo=leetcode&logoColor=FF9F1C)](https://leetcode.com/AdnanZhaikh)
 [![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=FF9F1C)](mailto:adnanibrahimshaikh@gmail.com)
 
 ⭐ Thanks for stopping by!
