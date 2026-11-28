@@ -48,7 +48,7 @@ I explore technologies as I feel like it. Web apps, real-time tools, Python util
 
 <img src="pet/chicken.svg" width="640" alt="My GitHub streak chicken" />
 
-*Keep the streak alive and the chicken grows. Break it and he's back to an egg.*
+*Keep the streak alive and the chicken grows. Break it and he's back to an egg*
 
 </div>
 
